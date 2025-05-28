@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jogo de Adivinhação</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    padding: 20px;
+  }
+  #adivinheBtn {
+    background-color: #4CAF50; /* Cor de fundo personalizada */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px; /* Borda arredondada */
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  #adivinheBtn:hover {
+    background-color: #45a049;
+  }
+  #feedback {
+    margin-top: 20px;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+
+<h2>Adivinhe o número entre 1 e 10</h2>
+<input type="number" id="numeroInput" min="1" max="10" />
+<button id="adivinheBtn">Adivinhar</button>
+<div id="feedback"></div>
+
+<script>
+  const button = document.getElementById('adivinheBtn');
+  const input = document.getElementById('numeroInput');
+  const feedback = document.getElementById('feedback');
+
+  const numeroSecreto = Math.floor(Math.random() * 10) + 1;
+  let tentativas = 0;
+  let pontos = 10;
+
+  button.addEventListener('click', () => {
+    const palpite = parseInt(input.value);
+    tentativas++;
+
+    if (palpite === numeroSecreto) {
+      feedback.textContent = 'Parabéns! Você acertou!';
+      button.disabled = true;
+    } else {
+      feedback.textContent = 'Errado! Tente novamente.';
+    }
+
+    if (tentativas >= 3 && palpite !== numeroSecreto) {
+      feedback.textContent = `Suas tentativas acabaram! O número era ${numeroSecreto}.`;
+      button.disabled = true;
+    }
+  });
+</script>
+
+</body>
+</html>
